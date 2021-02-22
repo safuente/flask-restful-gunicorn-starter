@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: # Start gunicorn server with 2 worker, 2 threads and reload option (only for dev)
+      gunicorn app:app -w 2 --threads 2 -b 0.0.0.0:8000 --reload
+    container_name:
+      app
